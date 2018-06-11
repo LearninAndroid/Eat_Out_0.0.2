@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">EatOut</string>
+    <string name="slogan"> If you don’t lick your fingers, enjoy only half
+                        </string>
+    <string name="hint_phone">Phone Number</string>
+</resources>

@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "704306835623",
+    "firebase_url": "https://eatout-20c7d.firebaseio.com",
+    "project_id": "eatout-20c7d",
+    "storage_bucket": "eatout-20c7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704306835623:android:4f3df77c5693ab05",
+        "android_client_info": {
+          "package_name": "dev.brian.com.eatout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704306835623-p0j8a5ifhore6s9mjv05d3piif0ukggi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.brian.com.eatout",
+            "certificate_hash": "b3ffc4ad5bb18cab4a0c4077548c16bfdd53951d"
+          }
+        },
+        {
+          "client_id": "704306835623-r97lnsj5glb4efo06mernis17378h2r7.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "704306835623-r97lnsj5glb4efo06mernis17378h2r7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOPBM4AyRg_QIJIMgfN0uKLZSeanKiXw0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704306835623-r97lnsj5glb4efo06mernis17378h2r7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
