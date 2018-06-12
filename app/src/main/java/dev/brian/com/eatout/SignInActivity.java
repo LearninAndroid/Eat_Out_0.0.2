@@ -55,11 +55,8 @@ public class SignInActivity extends AppCompatActivity {
                             }
                         }else{
                             Toast.makeText(SignInActivity.this,"User Does Not Exist",Toast.LENGTH_SHORT).show();
-
                         }
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
