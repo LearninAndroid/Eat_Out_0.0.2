@@ -1,5 +1,6 @@
 package dev.brian.com.eatout;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -58,7 +59,10 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(FoodList.this,""+local.getName(), Toast.LENGTH_SHORT).show();
+                        Intent foodDetail = new Intent(FoodList.this,FoodDetail.class);
+                        foodDetail.putExtra("FoodId",adapter.getRef(position).getKey());
+                        startActivity(foodDetail);
+
                     }
                 });
             }
