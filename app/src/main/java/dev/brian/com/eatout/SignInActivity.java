@@ -49,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
                         if(dataSnapshot.child(editPhone.getText().toString()).exists()) {
                             mDialog.dismiss();
                             User user = dataSnapshot.child(editPhone.getText().toString()).getValue(User.class);
+                            user.setPhone(editPhone.getText().toString());
                             if (user.getPassword().equals(editPassword.getText().toString())) {
                                 Toast.makeText(SignInActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                                 Intent homeIntent = new Intent(SignInActivity.this,Home.class);

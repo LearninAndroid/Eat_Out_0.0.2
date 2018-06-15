@@ -23,10 +23,18 @@ public class User {
 
     private String Name;
     private String Password;
+    private String Phone;
 
-    public User(String name, String password){
+    public User(String name, String password,String phone){
         this.Name = name;
         this.Password = password;
+        this.Phone = phone;
+    }
+    public String getPhone(){
+        return Phone;
+    }
+    public void setPhone(String phone){
+        Phone = phone;
     }
 
 }
