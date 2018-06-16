@@ -1,6 +1,7 @@
 package dev.brian.com.eatout;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import dev.brian.com.eatout.Common.Common;
 import dev.brian.com.eatout.Model.User;
 
 public class SignUp extends AppCompatActivity {
@@ -47,15 +49,19 @@ public class SignUp extends AppCompatActivity {
                             Toast.makeText(SignUp.this, "User Already Exists", Toast.LENGTH_SHORT).show();
 
                         }else{
+
                             mDialog.dismiss();
-                            User user = new User(edtName.getText().toString(),edtPassword.getText().toString());
+                            User user = new User(edtName.getText().toString(),edtPassword.getText().toString(),edPhone.getText().toString());
                             databaseReference.child(edPhone.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "User Added Successfully", Toast.LENGTH_SHORT).show();
+                           // finish();
+                            Intent HomeActivity = new Intent(SignUp.this,Home.class);
+                            Common.currentUser = user;
+                            startActivity(HomeActivity);
                             finish();
 
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
