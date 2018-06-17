@@ -11,12 +11,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
 import dev.brian.com.eatout.Interface.ItemClickListener;
 import dev.brian.com.eatout.Model.Food;
 import dev.brian.com.eatout.ViewHolder.FoodViewHolder;

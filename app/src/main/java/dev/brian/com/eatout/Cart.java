@@ -9,14 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import dev.brian.com.eatout.Database.Database;
 import dev.brian.com.eatout.Model.Order;
 import dev.brian.com.eatout.ViewHolder.CartAdapter;
@@ -61,7 +58,5 @@ public class Cart extends AppCompatActivity {
         Locale locale = new Locale("en","US");
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
         txtTotalPrice.setText(numberFormat.format(total));
-
-
     }
 }
