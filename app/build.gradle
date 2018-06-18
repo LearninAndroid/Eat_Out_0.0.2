@@ -45,5 +45,4 @@ dependencies {
     implementation 'com.github.mancj:MaterialSearchBar:0.7.6'
 
 
-
 }
