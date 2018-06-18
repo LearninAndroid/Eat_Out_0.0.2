@@ -3,10 +3,13 @@ package dev.brian.com.eatout;
 import android.icu.text.NumberFormat;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +22,7 @@ import dev.brian.com.eatout.Model.Order;
 import dev.brian.com.eatout.ViewHolder.CartAdapter;
 
 public class Cart extends AppCompatActivity {
+    CheckOutListener checkOutListener = new CheckOutListener();
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManage;
     FirebaseDatabase firebaseDatabase;
@@ -42,6 +46,7 @@ public class Cart extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManage);
         txtTotalPrice = (TextView)findViewById(R.id.total);
         placeOrder = (Button)findViewById(R.id.btnPlaceOrder);
+        placeOrder.setOnClickListener(checkOutListener);
         loadListFood();
     }
 
@@ -58,5 +63,12 @@ public class Cart extends AppCompatActivity {
         Locale locale = new Locale("en","US");
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
         txtTotalPrice.setText(numberFormat.format(total));
+    }
+    class CheckOutListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
+        }
     }
 }
