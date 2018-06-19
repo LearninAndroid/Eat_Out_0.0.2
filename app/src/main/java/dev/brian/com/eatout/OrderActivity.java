@@ -8,6 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mancj.materialsearchbar.MaterialSearchBar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import dev.brian.com.eatout.Common.Common;
 import dev.brian.com.eatout.Model.Request;
@@ -20,6 +24,7 @@ public class OrderActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference requests;
     FirebaseRecyclerAdapter<Request,OrderViewHolder> adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

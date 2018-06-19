@@ -7,17 +7,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import dev.brian.com.eatout.Interface.ItemClickListener;
 import dev.brian.com.eatout.Model.Food;
+import dev.brian.com.eatout.Model.Request;
 import dev.brian.com.eatout.ViewHolder.FoodViewHolder;
+import dev.brian.com.eatout.ViewHolder.OrderViewHolder;
 
 public class FoodList extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerView;
@@ -26,6 +38,9 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
     DatabaseReference foodList;
     String CategoryId ="";
     FirebaseRecyclerAdapter<Food,FoodViewHolder> adapter;
+    FirebaseRecyclerAdapter<Food,FoodViewHolder> searchAdapter;
+    List<String> suggestList = new ArrayList<>();
+    MaterialSearchBar materialSearchBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +58,70 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
         if(!CategoryId.isEmpty() && CategoryId!=null){
             loadListFood(CategoryId);
         }
+        materialSearchBar = (MaterialSearchBar)findViewById(R.id.searchBar);
+        materialSearchBar.setHint("Enter Your Food");
+        //materialSearchBar.setSpeechMode(false);
+        loadSuggestion();
+        materialSearchBar.setLastSuggestions(suggestList);
+        materialSearchBar.setCardViewElevation(10);
+        materialSearchBar.addTextChangeListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                List<String> suggest = new ArrayList<>();
+                for(String search:suggest){
+                    if(search.toLowerCase().contains(materialSearchBar.getText().toLowerCase())){
+                        suggest.add(search);
+                    }
+                    materialSearchBar.setLastSuggestions(suggest);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+            @Override
+            public void onSearchStateChanged(boolean enabled) {
+                if(!enabled){
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onSearchConfirmed(CharSequence text) {
+                startSearch();
+            }
+
+            @Override
+            public void onButtonClicked(int buttonCode) {
+
+            }
+        });
+    }
+
+    private void loadSuggestion() {
+        foodList.orderByChild("MenuId".equals(CategoryId)).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Food Item = snapshot.getValue(Food.class);
+                    suggestList.add(Item.getName());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void loadListFood(String categoryId) {
@@ -67,6 +146,19 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
         };
         //Log.d("TAG",""+adapter.getItemCount());
         recyclerView.setAdapter(adapter);
+    }
+
+    private void startSearch(CharSequence text){
+        searchAdapter  = new FirebaseRecyclerAdapter<Food,FoodViewHolder>(Food.class,
+                R.layout.food_item,
+                FoodViewHolder.class,
+                foodList.orderByChild("MenuId").equalTo(CategoryId)){
+
+            @Override
+            protected void populateViewHolder(FoodViewHolder viewHolder, Food model, int position) {
+
+            }
+        };
     }
 
     @Override
