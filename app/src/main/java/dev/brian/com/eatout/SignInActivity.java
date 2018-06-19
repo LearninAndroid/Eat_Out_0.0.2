@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.style.Wave;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +26,7 @@ public class SignInActivity extends AppCompatActivity {
 
     EditText editPhone, editPassword;
     Button btnSign;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,13 @@ public class SignInActivity extends AppCompatActivity {
         editPhone = (MaterialEditText) findViewById(R.id.edtPhone);
         editPassword = (MaterialEditText) findViewById(R.id.editPassword);
         btnSign = (Button) findViewById(R.id.btnLogin);
+        progressBar = (ProgressBar)findViewById(R.id.spin_kit);
+        Wave wave = new Wave();
+        progressBar.setIndeterminateDrawable(wave);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference("User");
+        setProgressBarIndeterminateVisibility(true);
+
 
         btnSign.setOnClickListener(new View.OnClickListener(){
 
@@ -41,6 +49,7 @@ public class SignInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final ProgressDialog mDialog = new ProgressDialog(SignInActivity.this);
                 mDialog.setMessage("Please Wait......");
+
                 mDialog.show();
                 databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override

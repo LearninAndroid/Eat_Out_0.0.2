@@ -61,7 +61,7 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
         materialSearchBar = (MaterialSearchBar)findViewById(R.id.searchBar);
         materialSearchBar.setHint("Enter Your Food");
         //materialSearchBar.setSpeechMode(false);
-        loadSuggestion();
+       // loadSuggestion();
         materialSearchBar.setLastSuggestions(suggestList);
         materialSearchBar.setCardViewElevation(10);
         materialSearchBar.addTextChangeListener(new TextWatcher() {
@@ -96,7 +96,7 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
 
             @Override
             public void onSearchConfirmed(CharSequence text) {
-                startSearch();
+                //startSearch();
             }
 
             @Override
@@ -106,7 +106,7 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
         });
     }
 
-    private void loadSuggestion() {
+  /*  private void loadSuggestion() {
         foodList.orderByChild("MenuId".equals(CategoryId)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -122,7 +122,7 @@ public class FoodList extends AppCompatActivity implements NavigationView.OnNavi
 
             }
         });
-    }
+    }*/
 
     private void loadListFood(String categoryId) {
         adapter = new FirebaseRecyclerAdapter<Food,FoodViewHolder>(Food.class,R.layout.food_item,FoodViewHolder.class,
